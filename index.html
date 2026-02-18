@@ -153,6 +153,39 @@ buttons.forEach(btn => {
             display[currentIndex] = num;
             screen.textContent = display.join('');
             currentIndex++;
+            
+            // Controlla se il codice è completo
+            if (currentIndex === codeLength) {
+                setTimeout(() => {
+                    const enteredCode = display.join('');
+                    if (enteredCode === '1111111') {
+                        // Codice corretto!
+                        keypad.innerHTML = `
+                            <div style="text-align: center; padding: 40px;">
+                                <h1 style="color: #00ff00; font-size: 3rem; margin-bottom: 30px; animation: blink 1s infinite;">✓ ACCESSO CONCESSO</h1>
+                                <div style="border: 2px solid #00ff00; padding: 30px; background-color: #001100; display: inline-block;">
+                                    <h2 style="margin-bottom: 20px; color: #00ff00;">COORDINATE BUNKER SEGRETO</h2>
+                                    <p style="font-size: 1.5rem; margin: 10px 0;">LAT: 42°19'47.5"N</p>
+                                    <p style="font-size: 1.5rem; margin: 10px 0;">LON: 71°05'11.3"W</p>
+                                    <p style="font-size: 1.2rem; margin-top: 20px; color: #ffff00;">VAULT 111 - CLEARANCE LEVEL: ALPHA</p>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        // Codice errato
+                        screen.style.backgroundColor = '#330000';
+                        screen.style.color = '#ff0000';
+                        screen.textContent = 'ERRORE';
+                        setTimeout(() => {
+                            currentIndex = 0;
+                            display = Array(codeLength).fill('*');
+                            screen.textContent = display.join('');
+                            screen.style.backgroundColor = '#001100';
+                            screen.style.color = '#00ff00';
+                        }, 2000);
+                    }
+                }, 300);
+            }
         }
     });
 });
@@ -162,6 +195,43 @@ document.getElementById('clearBtn').addEventListener('click', () => {
     currentIndex = 0;
     display = Array(codeLength).fill('*');
     screen.textContent = display.join('');
+});
+
+// Codice corretto
+const correctCode = '1111111';
+
+// Controlla il codice quando è completo
+buttons.forEach(btn => {
+    const originalListener = btn.onclick;
+    btn.addEventListener('click', () => {
+        if (currentIndex === codeLength) {
+            const enteredCode = display.join('');
+            if (enteredCode === correctCode) {
+                // Codice corretto!
+                keypad.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <h1 style="color: #00ff00; font-size: 3rem; margin-bottom: 30px;">ACCESSO CONCESSO</h1>
+                        <div style="border: 2px solid #00ff00; padding: 20px; background-color: #001100; display: inline-block;">
+                            <h2 style="margin-bottom: 20px;">COORDINATE BUNKER</h2>
+                            <p style="font-size: 1.5rem; margin: 10px 0;">LAT: 42°19'47.5"N</p>
+                            <p style="font-size: 1.5rem; margin: 10px 0;">LON: 71°05'11.3"W</p>
+                            <p style="font-size: 1.2rem; margin-top: 20px; color: #ffff00;">VAULT 111 - LIVELLO CLEARANCE ALPHA</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Codice errato
+                screen.style.backgroundColor = '#330000';
+                screen.textContent = 'ERRORE';
+                setTimeout(() => {
+                    currentIndex = 0;
+                    display = Array(codeLength).fill('*');
+                    screen.textContent = display.join('');
+                    screen.style.backgroundColor = '#001100';
+                }, 2000);
+            }
+        }
+    });
 });
 </script>
 </body>
