@@ -212,9 +212,18 @@ buttons.forEach(btn => {
                         keypad.style.display = 'none';
                         const win = document.createElement('div');
                         win.style.cssText = 'position:fixed;inset:0;background:#0a0a0a;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;z-index:9999;padding:1vmin;box-sizing:border-box;';
+                        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                        const pdfContent = isIOS
+                            ? `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:3vmin;">
+                                <p style="color:#00ff00;font-family:'Courier New',monospace;font-size:clamp(0.8rem,3vmin,1.1rem);text-align:center;margin:0;">Documento classificato disponibile.</p>
+                                <a href="info.pdf" target="_blank" style="color:#00ff00;border:2px solid #00ff00;padding:2vmin 5vmin;font-family:'Courier New',monospace;font-size:clamp(0.9rem,3.5vmin,1.2rem);text-decoration:none;letter-spacing:1px;">
+                                    ⬇ APRI DOCUMENTO CLASSIFICATO
+                                </a>
+                               </div>`
+                            : `<iframe src="info.pdf" style="flex:1;width:100%;border:2px solid #00ff00;background:#001100;display:block;min-height:0;" title="Info"></iframe>`;
                         win.innerHTML = `
                             <h1 style="color:#00ff00;font-size:clamp(1rem,4vmin,2rem);margin:1vmin 0;">✓ ACCESSO CONSENTITO</h1>
-                            <iframe src="info.pdf" style="flex:1;width:100%;border:2px solid #00ff00;background:#001100;display:block;min-height:0;" title="Info"></iframe>
+                            ${pdfContent}
                         `;
                         document.body.appendChild(win);
                     } else {
