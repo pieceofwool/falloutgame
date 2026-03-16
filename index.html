@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pulsantiera Fallout</title>
+<title>V A U L T - T E C // A C C E S S O _ R I S T R E T T O</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
@@ -19,12 +19,16 @@ body {
 
 /* Loading screen */
 #loading {
-    text-align: center;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 #vaultboy {
-    width: 1200px;
-    max-width: 100%;
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
 }
 
 #loadingText {
@@ -42,42 +46,45 @@ body {
 #screen {
     width: 90%;
     max-width: 400px;
-    height: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 2vmin;
     border: 2px solid #00ff00;
     color: #00ff00;
-    font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    letter-spacing: 10px;
     background-color: #001100;
     margin-left: auto;
     margin-right: auto;
 }
 
-@media (min-width: 576px) {
-    #screen {
-        font-size: 2rem;
-        letter-spacing: 15px;
-    }
-}
 
 .btn-fallout {
     background-color: #003300;
     border: 2px solid #00ff00;
     color: #00ff00;
-    font-size: 1.5rem;
-    width: 80px;
-    height: 80px;
-    margin: 5px;
+    font-size: 5.5vmin;
+    width: 16vmin;
+    height: 16vmin;
+    margin: 1.2vmin;
     transition: all 0.1s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .btn-fallout:hover {
     background-color: #005500;
     transform: scale(1.1);
 }
+
+#screen {
+    height: 10vmin;
+    font-size: 5vmin;
+    letter-spacing: 2vmin;
+}
+
+
 </style>
 </head>
 <body>
@@ -86,28 +93,31 @@ body {
 <div id="loading">
     <img id="vaultboy" src="loading.svg" alt="Loading">
     <!-- <div id="loadingText">CARICAMENTO...</div> -->
+    <div class="text-end mt-2" style="position:absolute;bottom:8px;right:10px;color:#004400;font-family:'Courier New',monospace;font-size:0.55rem;">
+        ⚠ FINZIONE — scenario softair.<br>Qualsiasi riferimento a luoghi reali è puramente narrativo.
+    </div>
 </div>
 
 <!-- Keypad -->
 <div id="keypad" class="container">
     <div id="screen">*****</div>
     <div class="row justify-content-center mb-2">
-        <button class="btn btn-fallout col-3 col-sm-2" data-num="1">1</button>
-        <button class="btn btn-fallout col-3 col-sm-2" data-num="2">2</button>
-        <button class="btn btn-fallout col-3 col-sm-2" data-num="3">3</button>
+        <button class="btn btn-fallout" data-num="1" data-symbol="⍟" data-freq="440.00">⍟</button>
+        <button class="btn btn-fallout" data-num="2" data-symbol="☢" data-freq="329.63">☢</button>
+        <button class="btn btn-fallout" data-num="3" data-symbol="⊛" data-freq="493.88">⊛</button>
     </div>
     <div class="row justify-content-center mb-2">
-        <button class="btn btn-fallout col-3 col-sm-2" data-num="4">4</button>
-        <button class="btn btn-fallout col-3 col-sm-2" data-num="5">5</button>
-        <button class="btn btn-fallout col-3 col-sm-2" data-num="6">6</button>
+        <button class="btn btn-fallout" data-num="4" data-symbol="▲" data-freq="noise">▲</button>
+        <button class="btn btn-fallout" data-num="5" data-symbol="♦" data-freq="261.63">♦</button>
+        <button class="btn btn-fallout" data-num="6" data-symbol="⌬" data-freq="349.23">⌬</button>
     </div>
     <div class="row justify-content-center mb-2">
-        <button class="btn btn-fallout col-3 col-sm-2" data-num="7">7</button>
-        <button class="btn btn-fallout col-3 col-sm-2" data-num="8">8</button>
-        <button class="btn btn-fallout col-3 col-sm-2" data-num="9">9</button>
+        <button class="btn btn-fallout" data-num="7" data-symbol="⊕" data-freq="293.66">⊕</button>
+        <button class="btn btn-fallout" data-num="8" data-symbol="◈" data-freq="392.00">◈</button>
+        <button class="btn btn-fallout" data-num="9" data-symbol="✦" data-freq="glide">✦</button>
     </div>
     <div class="row justify-content-center mb-2">
-        <button class="btn btn-fallout col-6 col-sm-3" id="clearBtn">
+        <button class="btn btn-fallout" id="clearBtn" style="width: calc(3 * 16vmin + 4 * 1.2vmin);" >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
                 <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
@@ -116,16 +126,6 @@ body {
     </div>
 </div>
 
-<!-- Audio -->
-<audio id="sound1" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg"></audio>
-<audio id="sound2" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3" type="audio/mpeg"></audio>
-<audio id="sound3" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg"></audio>
-<audio id="sound4" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3" type="audio/mpeg"></audio>
-<audio id="sound5" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2573/2573-preview.mp3" type="audio/mpeg"></audio>
-<audio id="sound6" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2574/2574-preview.mp3" type="audio/mpeg"></audio>
-<audio id="sound7" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2575/2575-preview.mp3" type="audio/mpeg"></audio>
-<audio id="sound8" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2576/2576-preview.mp3" type="audio/mpeg"></audio>
-<audio id="sound9" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2577/2577-preview.mp3" type="audio/mpeg"></audio>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -139,9 +139,50 @@ let currentIndex = 0;
 let display = Array(codeLength).fill('*');
 screen.textContent = display.join('');
 
-// Preload tutti i suoni
-for (let i = 1; i <= 9; i++) {
-    document.getElementById('sound' + i).load();
+// Web Audio API
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playNote(freq) {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+    osc.start(audioCtx.currentTime);
+    osc.stop(audioCtx.currentTime + 0.6);
+}
+
+function playNoise() {
+    const duration = 0.35;
+    const bufferSize = Math.floor(audioCtx.sampleRate * duration);
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const source = audioCtx.createBufferSource();
+    source.buffer = buffer;
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    source.connect(gain);
+    gain.connect(audioCtx.destination);
+    source.start();
+}
+
+function playGlide() {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(900, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.5);
+    gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+    osc.start(audioCtx.currentTime);
+    osc.stop(audioCtx.currentTime + 0.5);
 }
 
 setTimeout(() => {
@@ -152,39 +193,34 @@ setTimeout(() => {
 buttons.forEach(btn => {
     btn.addEventListener('click', () => {
         if (currentIndex < codeLength) {
-            const num = btn.dataset.num;
-            const sound = document.getElementById('sound' + num);
-            sound.pause();
-            sound.currentTime = 0;
-            sound.play().catch(e => {
-                console.log("Audio bloccato dal browser.");
-            });
-            display[currentIndex] = num;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const freq = btn.dataset.freq;
+            if (freq === 'noise') playNoise();
+            else if (freq === 'glide') playGlide();
+            else playNote(parseFloat(freq));
+
+            const symbol = btn.dataset.symbol;
+            display[currentIndex] = symbol;
             screen.textContent = display.join('');
             currentIndex++;
-            
-            // Controlla se il codice è completo
+
             if (currentIndex === codeLength) {
                 setTimeout(() => {
                     const enteredCode = display.join('');
-                    if (enteredCode === '1111111') {
-                        // Codice corretto!
-                        keypad.innerHTML = `
-                            <div style="text-align: center; padding: 40px;">
-                                <h1 style="color: #00ff00; font-size: 3rem; margin-bottom: 30px; animation: blink 1s infinite;">✓ ACCESSO CONCESSO</h1>
-                                <div style="border: 2px solid #00ff00; padding: 30px; background-color: #001100; display: inline-block;">
-                                    <h2 style="margin-bottom: 20px; color: #00ff00;">COORDINATE BUNKER SEGRETO</h2>
-                                    <p style="font-size: 1.5rem; margin: 10px 0;">LAT: 42°19'47.5"N</p>
-                                    <p style="font-size: 1.5rem; margin: 10px 0;">LON: 71°05'11.3"W</p>
-                                    <p style="font-size: 1.2rem; margin-top: 20px; color: #ffff00;">VAULT 111 - CLEARANCE LEVEL: ALPHA</p>
-                                </div>
-                            </div>
+                    if (enteredCode === '◈⊕⊛♦♦☢⍟') {
+                        keypad.style.display = 'none';
+                        const win = document.createElement('div');
+                        win.style.cssText = 'position:fixed;inset:0;background:#0a0a0a;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;z-index:9999;padding:1vmin;box-sizing:border-box;';
+                        win.innerHTML = `
+                            <h1 style="color:#00ff00;font-size:clamp(1rem,4vmin,2rem);margin:1vmin 0;">✓ ACCESSO CONSENTITO</h1>
+                            <iframe src="info.pdf" style="flex:1;width:100%;border:2px solid #00ff00;background:#001100;display:block;min-height:0;" title="Info"></iframe>
                         `;
+                        document.body.appendChild(win);
                     } else {
-                        // Codice errato
                         screen.style.backgroundColor = '#330000';
                         screen.style.color = '#ff0000';
-                        screen.textContent = 'ERRORE';
+                        screen.textContent = 'ERROR';
                         setTimeout(() => {
                             currentIndex = 0;
                             display = Array(codeLength).fill('*');
@@ -199,49 +235,12 @@ buttons.forEach(btn => {
     });
 });
 
-// Pulsante cancella
 document.getElementById('clearBtn').addEventListener('click', () => {
     currentIndex = 0;
     display = Array(codeLength).fill('*');
     screen.textContent = display.join('');
 });
-
-// Codice corretto
-const correctCode = '1111111';
-
-// Controlla il codice quando è completo
-buttons.forEach(btn => {
-    const originalListener = btn.onclick;
-    btn.addEventListener('click', () => {
-        if (currentIndex === codeLength) {
-            const enteredCode = display.join('');
-            if (enteredCode === correctCode) {
-                // Codice corretto!
-                keypad.innerHTML = `
-                    <div style="text-align: center; padding: 40px;">
-                        <h1 style="color: #00ff00; font-size: 3rem; margin-bottom: 30px;">ACCESSO CONCESSO</h1>
-                        <div style="border: 2px solid #00ff00; padding: 20px; background-color: #001100; display: inline-block;">
-                            <h2 style="margin-bottom: 20px;">COORDINATE BUNKER</h2>
-                            <p style="font-size: 1.5rem; margin: 10px 0;">LAT: 42°19'47.5"N</p>
-                            <p style="font-size: 1.5rem; margin: 10px 0;">LON: 71°05'11.3"W</p>
-                            <p style="font-size: 1.2rem; margin-top: 20px; color: #ffff00;">VAULT 111 - LIVELLO CLEARANCE ALPHA</p>
-                        </div>
-                    </div>
-                `;
-            } else {
-                // Codice errato
-                screen.style.backgroundColor = '#330000';
-                screen.textContent = 'ERRORE';
-                setTimeout(() => {
-                    currentIndex = 0;
-                    display = Array(codeLength).fill('*');
-                    screen.textContent = display.join('');
-                    screen.style.backgroundColor = '#001100';
-                }, 2000);
-            }
-        }
-    });
-});
 </script>
+
 </body>
 </html>
